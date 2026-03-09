@@ -1,9 +1,14 @@
 import { Request,Response } from 'express' 
-import {login,register} from '../services/auth.service'
+import {login,register,user} from '../services/auth.service'
 import jwt from 'jsonwebtoken'
 import { asyncHandler } from '../utils/asyncHandler'
 import { config } from 'dotenv'
+import { Role } from '../generated/prisma/enums'
 config()
+
+interface CustomRequest extends Request {
+  user?: { id: string , role:Role};
+}
 
 export const Register = asyncHandler(async(req:Request,res:Response)=>{
     const {email,password,role} = req.body
@@ -32,4 +37,12 @@ export const Login = asyncHandler(async(req:Request,res:Response)=>{
         User:user,
         token
     })
+})
+
+export const User = asyncHandler(async(req:CustomRequest,res:Response)=>{
+    const id = req.user?.id
+
+    const User = await user(id as string)
+
+    res.status(200).json(User)
 })
