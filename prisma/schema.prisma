@@ -20,4 +20,13 @@ model User {
   role        Role
   createdAt   DateTime  @default(now())
   
+  students    Student[]
+}
+
+model Student {
+  id          String  @id @default(uuid())
+  name        String
+  parentId    String
+
+  parent      User @relation(fields: [parentId], references: [id])
 }
