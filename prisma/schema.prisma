@@ -21,12 +21,45 @@ model User {
   createdAt   DateTime  @default(now())
   
   students    Student[]
+  lessons     Lesson[]
 }
 
 model Student {
   id          String  @id @default(uuid())
   name        String
   parentId    String
+  Booking     Booking[]
 
   parent      User @relation(fields: [parentId], references: [id])
+}
+
+model Lesson {
+  id          String @id  @default(uuid())
+  title       String
+  description String  
+  mentorId    String
+  Booking     Booking[]
+  Session     Session[]
+
+  mentor     User @relation(fields: [mentorId], references: [id])
+  
+}
+
+model Booking {
+  id          String @id  @default(uuid())
+  studentId   String
+  lessonId    String
+
+  student     Student @relation(fields: [studentId], references: [id])
+  lesson      Lesson  @relation(fields: [lessonId], references: [id])
+}
+
+model Session {
+  id          String @id  @default(uuid())
+  lessonId    String
+  date        DateTime
+  topic       String
+  summary     String
+
+  lesson      Lesson @relation(fields: [lessonId], references: [id])
 }
