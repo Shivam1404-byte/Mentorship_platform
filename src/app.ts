@@ -4,6 +4,7 @@ import { errorHandler } from "./middleware/errorMiddleware";
 import { studentRoute } from "./routes/student.route";
 import { lessonRoute } from "./routes/lesson.route";
 import { sessionRoute } from "./routes/session.route";
+import { bookRoute } from "./routes/booking.route";
 
 
 export const app = express() 
@@ -13,6 +14,7 @@ app.use('/auth',authRoute)
 app.use('/student',studentRoute)
 app.use('/lesson',lessonRoute)
 app.use('/',sessionRoute)
+app.use('/',bookRoute)
 
 app.get('/',(req,res)=>{
     res.status(200).json("App is running")

@@ -14,6 +14,12 @@ export const create_session = async(id:string,date:Date,topic:string,summary:str
         throw new AppError("You cannot create sessions for this lesson", 403)
     }
 
+    const parsedDate = new Date(date)
+
+    if (isNaN(parsedDate.getTime())) {
+    throw new AppError("Invalid date format", 400)
+    }
+
     const session = await prisma.session.create({
         data:{
             lessonId:lesson.id,

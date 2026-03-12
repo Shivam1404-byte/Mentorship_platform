@@ -11,7 +11,7 @@ export const createSession = asyncHandler(async(req:CustomRequest,res:Response)=
     const {lessonId,date,topic,summary} = req.body
     const mentorId = req.user?.id
 
-    const session = await create_session(mentorId as string,date,topic,summary,lessonId)
+    const session = await create_session(mentorId as string,new Date(date),topic,summary,lessonId)
 
     res.status(200).json({
         Message:"Session created successfully",
