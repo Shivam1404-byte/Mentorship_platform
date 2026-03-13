@@ -84,7 +84,7 @@ PORT=5000
 ### 4. Run database migration
 
 ```
-npx prisma migrate dev
+npx prisma migrate dev && npx prisma generate
 ```
 
 ### 5. Start the server
