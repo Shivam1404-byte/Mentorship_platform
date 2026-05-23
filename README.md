@@ -4,6 +4,8 @@
 
 This project is a simplified backend system for a mentorship platform where **parents**, **students**, and **mentors** interact.
 
+Live Link : https://mentorship-platform-o9ca.onrender.com
+
 The system allows:
 
 * Parents to create student profiles
